@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075522016315",
+    "project_id": "multi-login-e162b",
+    "storage_bucket": "multi-login-e162b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075522016315:android:38f6270f92a3a7f772781e",
+        "android_client_info": {
+          "package_name": "com.example.firebase_multilogin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvb5h5T0dWOBwjDpFKtOjevO8fymwKWqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
