@@ -1,9 +1,15 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_multilogin/Firebase%20Multi%20Login_Gym/Trainer/Edit_Profile_Trainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../main.dart';
 import '../Auth/loginn.dart';
-import 'display data.dart';
+import 'Trainer_chatpage.dart';
+
+
 
 
 class Trainer extends StatefulWidget {
@@ -125,14 +131,15 @@ class _TrainerState extends State<Trainer> {
               leading: Icon(Icons.person),
               title: Text(' Display Data '),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Display_Data()));
+               // Navigator.push(context, MaterialPageRoute(builder: (context)=>Display_Data()));
               },
             ),
+
             ListTile(
               leading: Icon(Icons.book),
-              title: Text(' My Course '),
+              title: Text(' Chat '),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Trainer_Chatpage(email: email_get,)));
               },
             ),
             ListTile(
@@ -140,6 +147,7 @@ class _TrainerState extends State<Trainer> {
               title: Text(' Go Premium '),
               onTap: () {
                 Navigator.pop(context);
+                print(email_get);
               },
             ),
             ListTile(
@@ -151,9 +159,36 @@ class _TrainerState extends State<Trainer> {
             ),
             ListTile(
               leading: Icon(Icons.edit),
-              title: Text(' Edit Profile '),
+              //title: Text(' Edit Profile '),
+              title: StreamBuilder(
+                stream: FirebaseFirestore.instance.collection('Trainer_Add_Data').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  }
+
+                  return Column(
+                    children: snapshot.data!.docs.map((document) {
+                      var id=document.id;
+                      return Padding(
+                        padding: EdgeInsets.only(right: 136),
+                       // child: Text("Edit Profile"),
+                      child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                Edit_Profile_Trainer(name:document['name'],image :document['image'],id: document.id,
+                                  phone: document['phone'],address: document['address'],gender: document['gender'],
+                                )));
+                          },
+                          child: Text("Edit Profile")),
+                      );
+                      // return Text(document['name'],style: TextStyle(fontSize: 20),);
+                    }).toList(),
+                  );
+                },
+              ),
               onTap: () {
-                Navigator.pop(context);
+
               },
             ),
             ListTile(

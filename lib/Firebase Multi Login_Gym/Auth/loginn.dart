@@ -3,6 +3,7 @@ import 'package:firebase_multilogin/Firebase%20Multi%20Login_Gym/Auth/registerr.
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../main.dart';
 import '../Owner/Owner_Home_Page.dart';
 import '../Trainer/Trainer_Add_Data.dart';
 import '../Trainer/Trainer_HomePage.dart';
@@ -288,8 +289,10 @@ class _LoginPageState extends State<LoginPage> {
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
+
         );
         route();
+        email_get=email;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');

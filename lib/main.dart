@@ -3,11 +3,20 @@ import 'package:flutter/material.dart';
 import 'Firebase Multi Login_Gym/Auth/loginn.dart';
 
 
+var email_get;
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      // options: FirebaseOptions(
+      //   apiKey: "",
+      //   appId: "",
+      //   messagingSenderId: "",
+      //   projectId: "",
+  //)
+  );
   runApp(const MyApp());
 }
 

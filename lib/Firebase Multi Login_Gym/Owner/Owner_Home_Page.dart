@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
+import '../../main.dart';
 import '../Auth/loginn.dart';
+import 'chatpage_Owner.dart';
 
 
 
@@ -31,6 +33,18 @@ class _OwnerState extends State<Owner> {
           )
         ],
       ),
+      body: Center(
+        child: Column(
+          children: [
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage_Owner(email: email_get,)));
+
+            }, child: Text("Chat")),
+          ],
+        ),
+      ),
+
+
     );
   }
 
