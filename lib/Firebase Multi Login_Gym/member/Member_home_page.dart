@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 
 import '../Auth/loginn.dart';
+import 'member_attendance.dart';
 
 
 class memberhome extends StatefulWidget {
@@ -49,6 +50,19 @@ class _memberhomeState extends State<memberhome> {
             SizedBox(
               height: 60,
             ),
+            ElevatedButton(
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    minimumSize: MaterialStateProperty.all(Size(350, 50))),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyWidget()));
+                },
+                child: Text("Mark Attndance")),
+            SizedBox(
+              height: 60,
+            ),
+
             ElevatedButton(
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.white),
