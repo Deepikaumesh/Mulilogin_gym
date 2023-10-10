@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 import '../Auth/loginn.dart';
+import 'View_Member_Attendance.dart';
 import 'chatpage_Owner.dart';
 
 
@@ -40,6 +41,11 @@ class _OwnerState extends State<Owner> {
               Navigator.push(context, MaterialPageRoute(builder: (context)=>chatpage_Owner(email: email_get,)));
 
             }, child: Text("Chat")),
+
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>View_Member_Attendance()));
+
+            }, child: Text("View Member Attendance")),
           ],
         ),
       ),

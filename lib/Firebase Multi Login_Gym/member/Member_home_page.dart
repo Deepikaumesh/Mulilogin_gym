@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 
 import '../Auth/loginn.dart';
-import 'member_attendance.dart';
+import 'Member_Mark_Attendance_Page.dart';
+import '../../Reserved Files/member_attendance.dart';
 
 
 class memberhome extends StatefulWidget {
@@ -56,7 +57,7 @@ class _memberhomeState extends State<memberhome> {
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     minimumSize: MaterialStateProperty.all(Size(350, 50))),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyWidget()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Member_Mark_Attendance()));
                 },
                 child: Text("Mark Attndance")),
             SizedBox(
