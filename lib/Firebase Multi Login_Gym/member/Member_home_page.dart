@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 
 import '../Auth/loginn.dart';
-import 'Member_Mark_Attendance_Page.dart';
+import '../../Reserved Files/Member_Mark_Attendance_Page.dart';
 import '../../Reserved Files/member_attendance.dart';
-import 'Member_Mark_Attendance_Page_Test.dart';
+import '../../Reserved Files/Member_Mark_Attendance_Page_Test.dart';
 import 'Member_Mark_Attendance_Page_Test2.dart';
 
 

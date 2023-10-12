@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../main.dart';
 
@@ -15,6 +16,12 @@ class _Member_Mark_Attendance_Test2State
     extends State<Member_Mark_Attendance_Test2> {
   CollectionReference users =
       FirebaseFirestore.instance.collection('Mark_Member_attendance');
+
+
+
+
+
+  String timeStamp24HR =DateTime.now().toString();
 
   var customId;
 
@@ -44,8 +51,8 @@ class _Member_Mark_Attendance_Test2State
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Date:" + getCurrentDate()),
-                Text("Time:" + getCurrentTime()),
+                Text("Date:" + getCurrentDate(),style: TextStyle(fontSize: 18.0)),
+                Text("Time:" + DateFormat.jm().format(DateTime.parse(timeStamp24HR)), style: TextStyle(fontSize: 18.0),)
               ],
             ),
             SizedBox(
@@ -110,41 +117,8 @@ class _Member_Mark_Attendance_Test2State
               style: TextStyle(fontSize: 25),
             ),
 
-            // Text(customId),
 
-            // Expanded(
-            //   child: StreamBuilder(
-            //     stream: users.snapshots(),
-            //     builder: (BuildContext context,
-            //         AsyncSnapshot<QuerySnapshot> snapshot) {
-            //       var doc = users.doc('id').get();
-            //
-            //       if (!snapshot.hasData) {
-            //         return Center(
-            //           child: CircularProgressIndicator(),
-            //         );
-            //       }
-            //
-            //       return ListView(
-            //         children: snapshot.data!.docs.map((document) {
-            //           return Container(
-            //               child: document['Date'] == getCurrentDate() &&
-            //                       document['email'] == email_get
-            //                   ? Center(child: Text("already marked Today"))
-            //                   : Center(
-            //                       child: ElevatedButton(
-            //                       onPressed: () {
-            //                         setState(() {
-            //                           Mark_attendance();
-            //                         });
-            //                       },
-            //                       child: Text("mark your attendance "),
-            //                     )));
-            //         }).toList(),
-            //       );
-            //     },
-            //   ),
-            // ),
+
           ],
         ),
       ),
