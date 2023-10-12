@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../Auth/loginn.dart';
 import 'Member_Mark_Attendance_Page.dart';
 import '../../Reserved Files/member_attendance.dart';
+import 'Member_Mark_Attendance_Page_Test.dart';
+import 'Member_Mark_Attendance_Page_Test2.dart';
 
 
 class memberhome extends StatefulWidget {
@@ -57,7 +59,7 @@ class _memberhomeState extends State<memberhome> {
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     minimumSize: MaterialStateProperty.all(Size(350, 50))),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Member_Mark_Attendance()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Member_Mark_Attendance_Test2()));
                 },
                 child: Text("Mark Attndance")),
             SizedBox(
@@ -120,8 +122,16 @@ class _memberhomeState extends State<memberhome> {
                     foregroundColor: MaterialStateProperty.all(Colors.white),
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     minimumSize: MaterialStateProperty.all(Size(350, 50))),
-                onPressed: () {},
+                onPressed: () {
+                  var timeNow = DateTime.now().hour;
+                  print(timeNow);
+                },
                 child: Text("Fee Payment")),
+
+
+
+
+
           ]),
         ),
       ),

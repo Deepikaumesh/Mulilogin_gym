@@ -48,8 +48,8 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
 
                       Row(
                         children: [
-                          Text("Member Name:"),
-                          Text(document['name']),
+                          Text("Member Email:"),
+                          Text(document['email']),
                         ],
                       ),
                     ],
