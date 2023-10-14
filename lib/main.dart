@@ -5,6 +5,8 @@ import 'Firebase Multi Login_Gym/Auth/loginn.dart';
 
 var email_get;
 
+var member_name;
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -110,12 +110,19 @@ class _Member_Mark_Attendance_Test2State
                 ),
                 child: Text(existinmessage,
                     style: TextStyle(color: select_color, fontSize: 20))),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child:  Image.asset("assets/attendance (1).png",height: 300,),
+            ),
+
 
             Spacer(),
             Text(
               '${email_get}',
               style: TextStyle(fontSize: 25),
             ),
+
+
 
 
 
@@ -158,13 +165,11 @@ class _Member_Mark_Attendance_Test2State
   }
 
   Mark_attendance() {
-    // FirebaseFirestore.instance.collection('Mark_Member_attendance').add({
-    //   'email': email_get,
-    //   'Date': getCurrentDate(),
-    // });
+
     DocumentReference<Map<String, dynamic>> users = FirebaseFirestore.instance
         .collection('Mark_Member_attendance')
-        .doc("${email_get}" + "${getCurrentDate()}");
+        // .doc("${email_get}" + "${getCurrentDate()}");
+        .doc(customId);
     var myjsonobj = {
       'email': email_get,
       'Date': getCurrentDate(),
@@ -188,7 +193,7 @@ class _Member_Mark_Attendance_Test2State
     }
     if (!a.exists) {
       print('Not exists');
-      existinmessage = "Attendance Marked Today!";
+      existinmessage = "Attendance Marked Successfully!";
       select_color = Colors.teal;
       return null;
     }

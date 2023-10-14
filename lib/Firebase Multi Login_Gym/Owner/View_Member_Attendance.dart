@@ -13,12 +13,19 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
   CollectionReference users =
       FirebaseFirestore.instance.collection('Mark_Member_attendance');
 
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
-        title: Text("geeksforgeeks"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        toolbarHeight: 100,
+        backgroundColor: Colors.grey.shade400,
+
+        title: Text("Member Attendance List",style: TextStyle(fontSize: 25),),
       ),
       body: StreamBuilder(
         stream: users.snapshots(),
@@ -31,33 +38,93 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
             );
           }
 
-          return ListView(
-            children: snapshot.data!.docs.map((document) {
-              return Column(
+          return Column(
+            children: [
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
 
-                  Column(
-
-                    children: [
-                      Row(
-                        children: [
-                          Text("Date:"),
-                          Text(document['Date']),
-                        ],
-                      ),
-
-                      Row(
-                        children: [
-                          Text("Member Email:"),
-                          Text(document['email']),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Divider(thickness: 2,),
+                  Text("Today",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(":",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(getCurrentDate(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                 ],
-              );
-            }).toList(),
+              ),
+              SizedBox(height: 20,),
+              Divider(thickness: 2,),
+              Flexible(
+                child: ListView(
+                  children: snapshot.data!.docs.map((document) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                        document['Date'] == getCurrentDate() ?
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+
+                                 // Icon(Icons.check,color: Colors.green,),
+                                  Image.asset("assets/check.png",height: 40,),
+
+                                  SizedBox(width: 10,),
+                                  CircleAvatar(radius: 20,
+                                    backgroundImage: AssetImage("assets/trainer.png"),
+                                    backgroundColor: Colors.transparent,
+                                  ),
+
+                                  SizedBox(width: 30,),
+                                  Text(document['email']),
+
+
+                                ],
+                              ),
+                            )
+
+                            : SizedBox(),
+
+
+
+
+
+
+
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+
+
+              // Flexible(
+              //   child: ListView(
+              //     children: snapshot.data!.docs.map((document) {
+              //       return Column(
+              //         children: [
+              //
+              //
+              //           Row(
+              //             children: [
+              //               Text("Date:"),
+              //               Text(document['Date']),
+              //             ],
+              //           ),
+              //
+              //           Row(
+              //             children: [
+              //               Text("Member Email:"),
+              //               Text(document['email']),
+              //             ],
+              //           ),
+              //           Divider(thickness: 2,),
+              //         ],
+              //       );
+              //     }).toList(),
+              //   ),
+              // ),
+            ],
           );
         },
       ),

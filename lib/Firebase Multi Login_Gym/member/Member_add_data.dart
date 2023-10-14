@@ -10,13 +10,11 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 import 'package:image_picker/image_picker.dart';
 
+import '../../main.dart';
 import 'Member_add_data.dart';
 import 'Member_home_page.dart';
-
-
 
 class Member_add_data extends StatefulWidget {
   const Member_add_data({Key? key}) : super(key: key);
@@ -31,11 +29,12 @@ class _Member_add_DataState extends State<Member_add_data> {
   final picker = ImagePicker();
 
 
-  TextEditingController _name=TextEditingController();
-  TextEditingController phone=TextEditingController();
-  TextEditingController age=TextEditingController();
-  TextEditingController gender=TextEditingController();
-  TextEditingController address=TextEditingController();
+
+  TextEditingController _name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController age = TextEditingController();
+  TextEditingController gender = TextEditingController();
+  TextEditingController address = TextEditingController();
 
   late bool status;
 
@@ -47,6 +46,7 @@ class _Member_add_DataState extends State<Member_add_data> {
 
   @override
   void initState() {
+
 
 
     status = false;
@@ -114,11 +114,13 @@ class _Member_add_DataState extends State<Member_add_data> {
               child: Form(
                 key: formkey,
                 child: Column(
-
                   children: [
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     TextFormField(
                       controller: _name,
+                      textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.text,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -130,12 +132,13 @@ class _Member_add_DataState extends State<Member_add_data> {
                       obscureText: false,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Colors.grey.shade900),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.grey.shade900),
                         ),
                         label: Text("Name"),
                         labelStyle: TextStyle(color: Colors.black),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             // color: Colors.grey[400],
@@ -144,11 +147,13 @@ class _Member_add_DataState extends State<Member_add_data> {
                         ),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.shade500,
-                            )),
+                          color: Colors.grey.shade500,
+                        )),
                       ),
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
                     TextFormField(
                       controller: phone,
                       keyboardType: TextInputType.number,
@@ -162,12 +167,13 @@ class _Member_add_DataState extends State<Member_add_data> {
                       obscureText: false,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Colors.grey.shade900),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.grey.shade900),
                         ),
                         label: Text("phone"),
                         labelStyle: TextStyle(color: Colors.black),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             // color: Colors.grey[400],
@@ -176,24 +182,23 @@ class _Member_add_DataState extends State<Member_add_data> {
                         ),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.shade500,
-                            )),
+                          color: Colors.grey.shade500,
+                        )),
                       ),
                     ),
-                    SizedBox(height: 30,),
-
-
-
+                    SizedBox(
+                      height: 30,
+                    ),
                     DropdownButtonFormField(
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(width: 2, color: Colors.grey.shade900),
+                              BorderSide(width: 2, color: Colors.grey.shade900),
                         ),
                         enabledBorder: OutlineInputBorder(
-                          //<-- SEE HERE
-                          // borderSide: BorderSide(color: Colors.black, width: 2),
-                        ),
+                            //<-- SEE HERE
+                            // borderSide: BorderSide(color: Colors.black, width: 2),
+                            ),
                         // focusedBorder: OutlineInputBorder(
                         //   //<-- SEE HERE
                         //   borderSide: BorderSide(color: Colors.black, width: 2),
@@ -219,7 +224,44 @@ class _Member_add_DataState extends State<Member_add_data> {
                         );
                       }).toList(),
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextFormField(
+                      controller: age,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter a Age";
+                        }
+                        return null;
+                      },
+                      onSaved: (name) {},
+                      obscureText: false,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.grey.shade900),
+                        ),
+                        label: Text("Age"),
+                        labelStyle: TextStyle(color: Colors.black),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            // color: Colors.grey[400],
+                            color: Colors.grey.shade500,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                          color: Colors.grey.shade500,
+                        )),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     TextFormField(
                       controller: address,
                       keyboardType: TextInputType.text,
@@ -233,12 +275,13 @@ class _Member_add_DataState extends State<Member_add_data> {
                       obscureText: false,
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 2, color: Colors.grey.shade900),
+                          borderSide:
+                              BorderSide(width: 2, color: Colors.grey.shade900),
                         ),
                         label: Text("Adress"),
                         labelStyle: TextStyle(color: Colors.black),
                         contentPadding:
-                        EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             // color: Colors.grey[400],
@@ -247,11 +290,13 @@ class _Member_add_DataState extends State<Member_add_data> {
                         ),
                         border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.grey.shade500,
-                            )),
+                          color: Colors.grey.shade500,
+                        )),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -295,18 +340,21 @@ class _Member_add_DataState extends State<Member_add_data> {
                             borderRadius: BorderRadius.circular(15),
                             child: _image != null
                                 ? Image.file(
-                              _image,
-                              fit: BoxFit.cover,
-                            )
+                                    _image,
+                                    fit: BoxFit.cover,
+                                  )
                                 : Center(
-                                child: Text(
-                                  "No image selected",
-                                  style: GoogleFonts.hindVadodara(
-                                      fontSize: 13, color: Colors.red.shade900),
-                                )),
+                                    child: Text(
+                                    "No image selected",
+                                    style: GoogleFonts.hindVadodara(
+                                        fontSize: 13,
+                                        color: Colors.red.shade900),
+                                  )),
                           )),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 17,
                       width: MediaQuery.of(context).size.width / 1.1,
@@ -314,23 +362,19 @@ class _Member_add_DataState extends State<Member_add_data> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                          ),
+                              borderRadius: BorderRadius.circular(10)),
                         ),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            setState(()  {
-
+                            setState(() {
                               uploadimage();
 
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => Member_add_data(),
+                                  builder: (context) => memberhome(),
                                 ),
                               );
-
-
                             });
                           }
                         },
@@ -339,41 +383,10 @@ class _Member_add_DataState extends State<Member_add_data> {
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
                       ),
-
                     ),
-                    SizedBox(height: 20,),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black45,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                        ),onPressed: (){
-                   //   Navigator.push(context, MaterialPageRoute(builder: (context)=>view_image()));
-
-                    }, child: Text("View Images")),
-
-                    // Text(
-                    //   status ? message : message,
-                    //   style: GoogleFonts.lato(
-                    //       fontSize: 12,
-                    //       color: Colors.red.shade900,
-                    //       fontWeight: FontWeight.bold),
-                    // ),
-
-
-
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black45,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)
-                          ),
-                        ),onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Member_add_data()));
-
-                    }, child: Text("gO tO hOME")),
-
+                    SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
 
@@ -386,13 +399,15 @@ class _Member_add_DataState extends State<Member_add_data> {
     );
   }
 
-  Future<void> uploadimage()  async {
-
+  Future<void> uploadimage() async {
     // print(_image);
 
     String fileName = _image.path.split('/').last;
 
-    var snapshot = await FirebaseStorage.instance.ref().child('My_images/$fileName').putFile(_image);
+    var snapshot = await FirebaseStorage.instance
+        .ref()
+        .child('My_images/$fileName')
+        .putFile(_image);
 
     var url = await snapshot.ref.getDownloadURL();
 
@@ -400,26 +415,35 @@ class _Member_add_DataState extends State<Member_add_data> {
 
     Map<String, dynamic> demodata = {
       "image": image_url,
-      "name"  :_name.text,
-      "phone"  :phone.text,
-      "gender"  :dropdownValue,
-      "address"  :address.text,
-      "age" :age.text,
+      "name": _name.text,
+      "phone": phone.text,
+      "gender": dropdownValue,
+      "address": address.text,
+      "age": age.text,
     };
 
-    CollectionReference collectionreference =
-    FirebaseFirestore.instance.collection('image_tb');
-    collectionreference.add(demodata)
+    FirebaseFirestore.instance
+        .collection("Member_Add_Data")
+        .doc("$email_get")
+        .set(demodata)
         .whenComplete(() {
       Fluttertoast.showToast(
         msg: "Inserted successfully",
-        // // toastLength: Toast.LENGTH_SHORT,
-        // backgroundColor: Colors.teal,
-        // textColor: Colors.white
       );
     });
 
+    //   collectionreference.add(demodata).
+    //     .whenComplete(() {
+    //   Fluttertoast.showToast(
+    //     msg: "Inserted successfully",
+    //     // // toastLength: Toast.LENGTH_SHORT,
+    //     // backgroundColor: Colors.teal,
+    //     // textColor: Colors.white
+    //   );
+    // });
   }
 
-}
 
+
+
+}

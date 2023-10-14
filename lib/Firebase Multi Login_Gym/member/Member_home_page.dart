@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,19 +23,44 @@ class _memberhomeState extends State<memberhome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Member"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              logout(context);
-            },
-            icon: Icon(
-              Icons.logout,
-            ),
-          )
-        ],
+        toolbarHeight: 100,
+        // title: Text("Trainer"),
+        title: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('Member_Add_Data').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+
+              return CircularProgressIndicator();
+            }
+
+            return Column(
+              children: snapshot.data!.docs.map((document) {
+
+
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+
+                    Text("Welcome "+document['name'],style: TextStyle(fontSize: 20),),
+
+
+                CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                        radius: 20,
+                        backgroundImage: NetworkImage(document['image'])),
+
+                  ],
+                );
+
+              }).toList(),
+            );
+          },
+
+        ),
       ),
-      drawer: Drawer(),
+      drawer: Drawer(
+
+      ),
       
       
       body: Center(
@@ -53,6 +79,19 @@ class _memberhomeState extends State<memberhome> {
             SizedBox(
               height: 60,
             ),
+            ElevatedButton(
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.white),
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    minimumSize: MaterialStateProperty.all(Size(350, 50))),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Member_Mark_Attendance_Test2()));
+                },
+                child: Text("Create Profile")), SizedBox(
+              height: 60,
+            ),
+
+
             ElevatedButton(
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.white),

@@ -10,7 +10,6 @@ import '../Trainer/Trainer_HomePage.dart';
 import '../member/Member_add_data.dart';
 import '../member/Member_home_page.dart';
 
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,9 +22,15 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
-  final _auth = FirebaseAuth.instance;
-  final snapshot =FirebaseFirestore.instance
-      .collection('Trainer_Add_Data').get();
+  var existinmessage;
+
+  @override
+  void initState() {
+    existinmessage = '';
+
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,39 +221,41 @@ class _LoginPageState extends State<LoginPage> {
 
   void route() {
     User? user = FirebaseAuth.instance.currentUser;
-    var kk = FirebaseFirestore.instance.collection('userdata').doc(user!.uid).get()
-        .then((DocumentSnapshot documentSnapshot) {
+    var kk = FirebaseFirestore.instance
+        .collection('userdata')
+        .doc(user!.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) async {
       if (documentSnapshot.exists) {
-
-        FirebaseFirestore.instance.collection('Trainer_Add_Data').limit(1).get().then((snapshot) {
-      //  FirebaseFirestore.instance.collection('image_tb').limit(1).get().then((snapshot) {
+        FirebaseFirestore.instance
+            .collection('Trainer_Add_Data')
+            .limit(1)
+            .get()
+            .then((snapshot) {
+          //  FirebaseFirestore.instance.collection('image_tb').limit(1).get().then((snapshot) {
 
           if (documentSnapshot.get('role') == "Trainer" && snapshot.size == 1) {
-
-
-
-
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Trainer(),),);
-
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Trainer(),
+              ),
+            );
           }
 
-
-          if(documentSnapshot.get('role') == "Trainer" && snapshot.size == 0){
+          if (documentSnapshot.get('role') == "Trainer" && snapshot.size == 0) {
             print("No collection");
 
-             Navigator.push(context, MaterialPageRoute(builder: (context) => Trainer_add_Data(),),);
-
-         //  Navigator.push(context, MaterialPageRoute(builder: (context) => image_form(),),);
-
-            //
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Trainer_add_Data(),
+              ),
+            );
           }
         });
 
-
-
-        if(documentSnapshot.get('role')=="Owner"){
+        if (documentSnapshot.get('role') == "Owner") {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -256,26 +263,43 @@ class _LoginPageState extends State<LoginPage> {
             ),
           );
         }
-        if(documentSnapshot.get('role')=="Member"){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => memberhome(),
-            ),
-          );
-        }
 
-        // else {
+
+        //
+        // if (documentSnapshot.get('role') == "Member") {
         //   Navigator.push(
         //     context,
         //     MaterialPageRoute(
         //       builder: (context) => memberhome(),
         //     ),
-        //
         //   );
         // }
 
+        var kk = await FirebaseFirestore.instance
+            .collection('Member_Add_Data')
+            .doc(email_get)
+            .get();
 
+        if (documentSnapshot.get('role') == "Member" && kk.exists) {
+          existinmessage = "member $email_get is exist";
+          print(existinmessage);
+
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => memberhome(),
+              ));
+        }
+        if (documentSnapshot.get('role') == "Member" && !kk.exists) {
+          existinmessage = "member $email_get is not exist";
+          print(existinmessage);
+
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Member_add_data(),
+              ));
+        }
       } else {
         print('Document does not exist on the database');
       }
@@ -289,10 +313,9 @@ class _LoginPageState extends State<LoginPage> {
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
-
         );
         route();
-        email_get=email;
+        email_get = email;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           print('No user found for that email.');
