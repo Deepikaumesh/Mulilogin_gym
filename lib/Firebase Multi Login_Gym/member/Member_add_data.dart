@@ -366,15 +366,16 @@ class _Member_add_DataState extends State<Member_add_data> {
                         ),
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            setState(() {
+                            setState(()  {
                               uploadimage();
+                              print("member name is ${member_name}");
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => memberhome(),
-                                ),
-                              );
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => memberhome(),
+                              //   ),
+                              // );
                             });
                           }
                         },
@@ -422,11 +423,25 @@ class _Member_add_DataState extends State<Member_add_data> {
       "age": age.text,
     };
 
+
+    member_Image =image_url;
+
     FirebaseFirestore.instance
         .collection("Member_Add_Data")
         .doc("$email_get")
         .set(demodata)
-        .whenComplete(() {
+        .whenComplete(()  {
+
+          setState(() {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => memberhome(),
+              ),
+            );
+          });
+
+
       Fluttertoast.showToast(
         msg: "Inserted successfully",
       );

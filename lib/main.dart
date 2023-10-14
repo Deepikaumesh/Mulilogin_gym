@@ -7,6 +7,8 @@ var email_get;
 
 var member_name;
 
+var member_Image;
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

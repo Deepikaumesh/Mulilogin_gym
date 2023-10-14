@@ -35,6 +35,8 @@ class _Member_Mark_Attendance_Test2State
     existinmessage = '';
     select_color = Colors.yellow;
     getDoc();
+    member_name;
+    member_Image;
     super.initState();
   }
 
@@ -171,8 +173,10 @@ class _Member_Mark_Attendance_Test2State
         // .doc("${email_get}" + "${getCurrentDate()}");
         .doc(customId);
     var myjsonobj = {
-      'email': email_get,
+      'Name':member_name,
+      'Email': email_get,
       'Date': getCurrentDate(),
+      'image':member_Image,
     };
     users
         .set(myjsonobj)

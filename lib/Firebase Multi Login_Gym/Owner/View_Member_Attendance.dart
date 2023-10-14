@@ -13,9 +13,6 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
   CollectionReference users =
       FirebaseFirestore.instance.collection('Mark_Member_attendance');
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +21,10 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
         centerTitle: true,
         toolbarHeight: 100,
         backgroundColor: Colors.grey.shade400,
-
-        title: Text("Member Attendance List",style: TextStyle(fontSize: 25),),
+        title: Text(
+          "Member Attendance List",
+          style: TextStyle(fontSize: 25),
+        ),
       ),
       body: StreamBuilder(
         stream: users.snapshots(),
@@ -40,63 +39,77 @@ class _View_Member_AttendanceState extends State<View_Member_Attendance> {
 
           return Column(
             children: [
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-
-                  Text("Today",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Text(":",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Text(getCurrentDate(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(
+                    "Today",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    ":",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    getCurrentDate(),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
-              SizedBox(height: 20,),
-              Divider(thickness: 2,),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                thickness: 2,
+              ),
               Flexible(
                 child: ListView(
                   children: snapshot.data!.docs.map((document) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
-                        document['Date'] == getCurrentDate() ?
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-
-                                 // Icon(Icons.check,color: Colors.green,),
-                                  Image.asset("assets/check.png",height: 40,),
-
-                                  SizedBox(width: 10,),
-                                  CircleAvatar(radius: 20,
-                                    backgroundImage: AssetImage("assets/trainer.png"),
-                                    backgroundColor: Colors.transparent,
-                                  ),
-
-                                  SizedBox(width: 30,),
-                                  Text(document['email']),
-
-
-                                ],
-                              ),
-                            )
-
+                        document['Date'] == getCurrentDate()
+                            ?
+                            // Padding(
+                            //   padding: const EdgeInsets.symmetric(horizontal: 50,vertical: 10),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.start,
+                            //     children: [
+                            //
+                            //      // Icon(Icons.check,color: Colors.green,),
+                            //       Image.asset("assets/check.png",height: 40,),
+                            //
+                            //       SizedBox(width: 10,),
+                            //       CircleAvatar(
+                            //         backgroundImage:NetworkImage(document['image']),
+                            //
+                            //       ),
+                            //
+                            //       SizedBox(width: 30,),
+                            //       Text(document['Name']),
+                            //
+                            //
+                            //     ],
+                            //   ),
+                            // )
+                            ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(document['image']),
+                                ),
+                              title:  Text(document['Name'],style: TextStyle(fontSize: 25),),
+                              trailing: Image.asset("assets/check.png",height: 40,) ,
+                              )
                             : SizedBox(),
-
-
-
-
-
-
-
+                        Divider(),
                       ],
                     );
                   }).toList(),
                 ),
               ),
-
 
               // Flexible(
               //   child: ListView(

@@ -284,11 +284,15 @@ class _LoginPageState extends State<LoginPage> {
           existinmessage = "member $email_get is exist";
           print(existinmessage);
 
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => memberhome(),
-              ));
+          setState(() {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => memberhome(),
+                ));
+          });
+
+
         }
         if (documentSnapshot.get('role') == "Member" && !kk.exists) {
           existinmessage = "member $email_get is not exist";
